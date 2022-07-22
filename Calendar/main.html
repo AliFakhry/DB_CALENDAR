@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet" />
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<style>
+.popover {
+    left: 60% !important;
+}
+.btn {
+    margin: 1%;
+}
+.ui-datepicker {
+    font-size:20px;
+}
+
+</style>
+</head>
+<body>
+    <div class=" col-md-4">
+      <div  class="date-picker-2" placeholder="Recipient's username" id="ttry" aria-describedby="basic-addon2"></div>
+      <span class="" id="example-popover-2"></span> </div>
+    <div id="example-popover-2-content" class="hidden"> </div>
+    <div id="example-popover-2-title" class="hidden"> </div>
+<script>
+$('.date-picker-2').popover({
+    html : true, 
+    content: function() {
+      return $("#example-popover-2-content").html();
+    },
+    title: function() {
+      return $("#example-popover-2-title").html();
+    }
+});
+$(".date-picker-2").datepicker({
+    onSelect: function(dateText) { 
+        $('#example-popover-2-title').html('<b>Avialable Appiontments</b>');
+        var html = '<button  class="btn btn-success">8:00 am – 11:00 am</button><br><button  class="btn btn-success">11:00 am – 2:00 pm</button><br><button  class="btn btn-success">2:00 pm – 5:00 pm </button><br><button  class="btn btn-success">5:00 pm – 8:00 pm</button>';
+        $('#example-popover-2-content').html('Avialable Appiontments On <strong>'+dateText+'</strong><br>'+html);
+        $('.date-picker-2').popover('show');
+    }
+});
+</script> 
+</body>
+</html>
