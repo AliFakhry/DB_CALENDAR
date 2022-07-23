@@ -1,42 +1,20 @@
-<!DOCTYPE html>
-<html>
-      
-<head>
-    <meta charset="utf-8" />
-    <link href=
-    "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" 
-        rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-1.10.2.js">
-    </script>
-    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js">
-    </script>
+<!-- this should go after your </body> -->
+<link rel="stylesheet" type="text/css" href="node_modules/jquery-datetimepicker/jquery.datetimepicker.css" >
+<script src="node_modules/jquery-datetimepicker/jquery.js"></script>
+<script src="node_modules/jquery-datetimepicker//build/jquery.datetimepicker.full.min.js"></script>
 
-</head>
-<div>
-  
-    Date: <div id="my_date_picker">
-   
-        <script>
-            $(function () {
-                $("#my_date_picker").datepicker({
-                    onSelect: function (date, datepicker) {
-                        if (date != "") {
-                            alert("Selected Date: " + date);
-                        }
-                    }
-                });
-            });
-        </script>
-</div>
 
-<div>
-    <button type="button" id="bulk_actions_btn"
-    class="btn btn-default has-spinner-two"
-    data-toggle="popover"
-    data-placement="bottom" data-original-title=""
-    data-content="Click any question mark icon to get help and tips with specific tasks"
-    aria-describedby="popover335446"> Apply
-    </button>
-</div> 
-  
-</html>
+<input id="datetimepicker" type="text" >
+
+<script>
+jQuery('#datetimepicker').datetimepicker({
+  format:'d.m.Y H:i',
+  inline:true,
+  lang:'ru',
+  allowTimes:[
+  '8:00', '11:00', '14:00',
+  '17:00'
+ ]
+});
+
+</script>

@@ -9,21 +9,36 @@
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 <style>
 .popover {
-    left: 60% !important;
+    left: 75% !important;
+    top: 25% !important;
+    font-size:20px;
 }
 .btn {
     margin: 1%;
 }
 .ui-datepicker {
-    font-size:20px;
+    font-size:40px;
+    border: 1px solid #555;
+}
+
+#datepicker-container{
+  text-align:center;
+}
+#datepicker-center{
+  top: 5% !important;
+  display:inline-block;
+  margin:0 auto;
 }
 
 </style>
 </head>
 <body>
-    <div class=" col-md-4">
-      <div  class="date-picker-2" placeholder="Recipient's username" id="ttry" aria-describedby="basic-addon2"></div>
-      <span class="" id="example-popover-2"></span> </div>
+        <div id="datepicker-container">
+            <div id="datepicker-center">
+                <div  class="date-picker-2" placeholder="Recipient's username" id="ttry" aria-describedby="basic-addon2"></div>
+                <span class="" id="example-popover-2"></span>
+            </div>
+        </div>    
     <div id="example-popover-2-content" class="hidden"> </div>
     <div id="example-popover-2-title" class="hidden"> </div>
 <script>
