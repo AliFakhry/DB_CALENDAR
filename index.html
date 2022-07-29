@@ -1,0 +1,45 @@
+<link rel="stylesheet" type="text/css" href="node_modules/jquery-datetimepicker/jquery.datetimepicker.css" >
+<script src="node_modules/jquery-datetimepicker/jquery.js"></script>
+<script src="node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js"></script>
+
+<style>
+.datepicker-container{
+  text-align:center;
+}
+
+.datepicker-center{
+  display:inline-block;
+  margin:0 auto;
+  zoom: 2;
+}
+
+</style>
+
+<div class="datepicker-container">
+  <div class="datepicker-center">
+    <div  class="datetimepicker-2"></div>
+  </div>
+</div>
+
+<script>
+
+jQuery(".datetimepicker-2").datetimepicker({
+  format:'d.m.Y H:i',
+  inline:true,
+  lang:'ru',
+  allowTimes:[
+  '8:00', '11:00', '14:00',
+  '17:00'
+ ]
+});
+
+function log() {
+  var date = $('.datetimepicker-2').datetimepicker('getValue');
+  console.log(date);
+};
+
+</script>
+
+<!-- <body>
+  <button onclick="log()">Click me!</button>
+</body> -->
