@@ -1,12 +1,33 @@
-<!-- this should go after your </body> -->
 <link rel="stylesheet" type="text/css" href="node_modules/jquery-datetimepicker/jquery.datetimepicker.css" >
 <script src="node_modules/jquery-datetimepicker/jquery.js"></script>
-<script src="node_modules/jquery-datetimepicker//build/jquery.datetimepicker.full.min.js"></script>
+<script src="node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js"></script>
 
-<input id="datetimepicker" type="text" >
+<style>
+.datepicker-container{
+  text-align:center;
+}
+
+.datepicker-center{
+  position: fixed !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform:translate(-50%, -50%);
+  -webkit-transform:translate(-50%, -50%); 
+  zoom: 1.5;
+  
+}
+
+</style>
+
+<div class="datepicker-container">
+  <div class="datepicker-center">
+    <div  class="datetimepicker-2"></div>
+  </div>
+</div>
 
 <script>
-jQuery("#datetimepicker").datetimepicker({
+
+jQuery(".datetimepicker-2").datetimepicker({
   format:'d.m.Y H:i',
   inline:true,
   lang:'ru',
@@ -17,13 +38,12 @@ jQuery("#datetimepicker").datetimepicker({
 });
 
 function log() {
-  var date = $('#datetimepicker').datetimepicker('getValue');
+  var date = $('.datetimepicker-2').datetimepicker('getValue');
   console.log(date);
 };
 
 </script>
 
-
-<body>
+<!-- <body>
   <button onclick="log()">Click me!</button>
-</body>
+</body> -->
