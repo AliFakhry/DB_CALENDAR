@@ -13,8 +13,7 @@
   top: 50% !important;
   transform:translate(-50%, -50%);
   -webkit-transform:translate(-50%, -50%); 
-  zoom: 1.5;
-  
+  zoom:2.0;
 }
 
 /* CSS */
@@ -30,7 +29,7 @@
   cursor: pointer;
   font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
   font-size: 100%;
-  height: 38px;
+  height: 65px;
   line-height: 1.15;
   margin: 12px 0 0;
   outline: none;
@@ -44,7 +43,7 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  width: 170px;
+  width: 250px;
 }
 
 .button-9:disabled {
@@ -56,29 +55,36 @@
 }
 </style>
 
-<body style="background-color:white;">
-  <div class="datepicker-container">
+<body style="background-color:black;">
+  <div class="datepicker-container_1">
     <div class="datepicker-center">
-      <input id="input" type="text" >
-      <input type="text" id="datetimepicker" />
+        <input id="input" type="text" >
+        <input type="text" id="datetimepicker" /> 
     </div>
-    <input type="button" onclick="javascript:hideIt();" value="Hide it !" />
-
-    <input type="button" onclick="javascript:showIt();" value="Show It !" />
-
   </div>
+
+  <div class="datepicker-container"> 
+    <!-- <input type="button" class="button-9" onclick="javascript:hideIt();" value="Hide it !" />
+
+    <input type="button" class="button-9" onclick="javascript:showIt();" value="Show It !" /> -->
+
+    <input type="button" class="button-9" onclick="log();" value="UPDATE !" />
+
+
 </body>
-
-
- 
 
 <script>
 
 $(function() {
 $( "#datetimepicker" ).datetimepicker({
+  theme: "dark",
   inline:true,
   timepicker: true,
   datepicker: false,
+  allowTimes:[
+  '8:00', '11:00', '14:00',
+  '17:00'
+ ],
 });
 });
 
@@ -87,68 +93,63 @@ function hideIt(){
     $( "#datetimepicker" ).hide();
 }
 
-function showIt(){
+function showIt(x){
     $( "#datetimepicker" ).show();
-    $( "#datetimepicker" ).datetimepicker({
-      inline:true,
-    timepicker: true,
-    datepicker: false,
-    });
+      if (x == " Aug 04") {
+      $( "#datetimepicker" ).datetimepicker({
+        theme: "dark",
+        inline:true,
+        timepicker: true,
+        datepicker: false,
+        allowTimes:[
+        '8:00', '14:00',
+        '17:00'
+      ],
+      });
+    }
+    else if (x == " Aug 08") {
+      $( "#datetimepicker" ).datetimepicker({
+        theme: "dark",
+        inline:true,
+        timepicker: true,
+        datepicker: false,
+        allowTimes:[
+        '8:00', 
+      ],
+      });
+    }
+    else{
+      $( "#datetimepicker" ).datetimepicker({
+        theme: "dark",
+        inline:true,
+        timepicker: true,
+        datepicker: false,
+        allowTimes:[
+        '8:00', '11:00', '14:00',
+        '17:00'
+      ],
+      });
+    }
 }
 
 $('#input').datetimepicker({
+  theme: "dark",
   minDate:new Date(),
-  theme: '',
   datepicker: true,
   timepicker: false,
   inline:true,
   format: 'M-d-Y',
   lang:'ru',
-  allowTimes:[
-  '8:00', '11:00', '14:00',
-  '17:00'
- ],
  disabledDates: ['Aug.15.2022'],
  formatDate: 'M.d.Y'
 });
 
-
-$(".datetimepicker-2").datetimepicker({
-  i18n: {
-        en: {
-            months: [
-                'January', 'February', 'March', 'April',
-                'May', 'June', 'July', 'August',
-                'September', 'october', 'November', 'December',
-            ],
-            dayOfWeek: [
-                "So.", "Mo", "Di", "Mi",
-                "Do", "Fr", "Sa.",
-            ]
-        }
-    },
-  minDate:new Date(),
-  // theme: 'dark',
-  datepicker: true,
-  timepicker: false,
-  inline:true,
-  format: 'M-d-Y',
-  lang:'ru',
-  allowTimes:[
-  '8:00', '11:00', '14:00',
-  '17:00'
- ],
- disabledDates: ['Aug.15.2022'],
- formatDate: 'M.d.Y',
-});
-
 function log() {
-  var date = $('.datetimepicker-2').datetimepicker('getValue');
-  console.log(date);
+  javascript:hideIt()
+  let date_val = $('#input').datetimepicker('getValue');
+  let val = date_val.toString().slice(3,10);
+  console.log(date_val.toString().slice(3,10));
+  javascript:showIt(val)
 };
-
-function display(){
-  $('#input').datetimepicker('hide');
-}
 
 </script>
