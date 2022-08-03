@@ -56,29 +56,99 @@
 }
 </style>
 
-<div class="datepicker-container">
-  <div class="datepicker-center">
-    <div  class="datetimepicker-2"></div>
-    <button class="button-9" onclick="log()">Select Time</button>
+<body style="background-color:white;">
+  <div class="datepicker-container">
+    <div class="datepicker-center">
+      <input id="input" type="text" >
+      <input type="text" id="datetimepicker" />
+    </div>
+    <input type="button" onclick="javascript:hideIt();" value="Hide it !" />
+
+    <input type="button" onclick="javascript:showIt();" value="Show It !" />
+
   </div>
-</div>
+</body>
+
+
+ 
 
 <script>
 
-jQuery(".datetimepicker-2").datetimepicker({
-  format:'d.m.Y H:i',
+$(function() {
+$( "#datetimepicker" ).datetimepicker({
   inline:true,
+  timepicker: true,
+  datepicker: false,
+});
+});
+
+function hideIt(){
+    $( "#datetimepicker" ).datetimepicker( "destroy" );
+    $( "#datetimepicker" ).hide();
+}
+
+function showIt(){
+    $( "#datetimepicker" ).show();
+    $( "#datetimepicker" ).datetimepicker({
+      inline:true,
+    timepicker: true,
+    datepicker: false,
+    });
+}
+
+$('#input').datetimepicker({
+  minDate:new Date(),
+  theme: '',
+  datepicker: true,
+  timepicker: false,
+  inline:true,
+  format: 'M-d-Y',
   lang:'ru',
   allowTimes:[
   '8:00', '11:00', '14:00',
   '17:00'
  ],
- minDate:new Date(),
+ disabledDates: ['Aug.15.2022'],
+ formatDate: 'M.d.Y'
+});
+
+
+$(".datetimepicker-2").datetimepicker({
+  i18n: {
+        en: {
+            months: [
+                'January', 'February', 'March', 'April',
+                'May', 'June', 'July', 'August',
+                'September', 'october', 'November', 'December',
+            ],
+            dayOfWeek: [
+                "So.", "Mo", "Di", "Mi",
+                "Do", "Fr", "Sa.",
+            ]
+        }
+    },
+  minDate:new Date(),
+  // theme: 'dark',
+  datepicker: true,
+  timepicker: false,
+  inline:true,
+  format: 'M-d-Y',
+  lang:'ru',
+  allowTimes:[
+  '8:00', '11:00', '14:00',
+  '17:00'
+ ],
+ disabledDates: ['Aug.15.2022'],
+ formatDate: 'M.d.Y',
 });
 
 function log() {
   var date = $('.datetimepicker-2').datetimepicker('getValue');
   console.log(date);
 };
+
+function display(){
+  $('#input').datetimepicker('hide');
+}
 
 </script>
