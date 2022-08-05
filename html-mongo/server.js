@@ -28,23 +28,17 @@ app.get("/", function(req, res) {
     res.sendFile(__dirname + "/index.html")
 })
 
-app.post("/", function(req, res) {
+app.post("/appointment", function(req, res) {
     let newData = new Val ({
-        title: req.body.title,
-        content: req.body.content
+        title: req.body.user_name,
+        content: req.body.phonenumber
     });
     newData.save();
     res.redirect('/');
 })
 
-app.post('/appointment', async (req, res) => {
-    console.log("HEY");
-    console.log(req.body.phonenumber);
-    res.redirect('/');
-});
-
 app.post('/cancelAppointment', async (req, res) => {  
-    let code = request.body.code;
+    let code = req.body.code;
     response.send(`This slot has been removed.`);
     res.redirect('/');
 });
