@@ -131,6 +131,11 @@ input[type=text] {
 <body style="background-color:black;">
     <div class="center" >       
         <div class = "shift_down">
+        <div><h3>
+            <label for="curr_date"></label>
+            <input type="text" id="curr_date" placeholder="" name="curr_date" readonly />
+            <span class="validity"></span>
+          </div> </h3> 
         <h2><input id="input" type="text" ></h2>
         </div> 
         <div><h3>
@@ -143,7 +148,8 @@ input[type=text] {
           <input type="text" id="email_input" placeholder="Email:" name="email_input" required />
           <span class="validity"></span>
         </div> </h3>
-        <input type="submit" class="button-9" onclick="log()" value="Book Time"></input>
+
+        <input type="submit" class="button-9" value="Book Time"></input>
   </div>
 </body>
 </form>
@@ -236,17 +242,11 @@ $('#input').datetimepicker({
 function re_run() {
   let date_val = $('#input').datetimepicker('getValue');
   let val = date_val.toString().slice(3,10);
+  document.getElementById("curr_date").value = val;
   javascript:hideIt()
   console.log(date_val.toString().slice(3,10));
   javascript:showIt(val)
 };
 
-function log(){
-  let val_1 = (document.getElementById('user_name').value)
-  let val_2 = (document.getElementById('email_input').value)
-
-  let val_3_init = $('#input').datetimepicker('getValue')
-  let val_3 = val_3_init.toString().slice(3,10)
-}
 
 </script>
