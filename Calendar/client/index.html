@@ -170,6 +170,7 @@ function showIt(x){
       $( "#input" ).datetimepicker({
         theme: "dark",
         minDate:new Date(),
+        MaxDate: "+1Y",
         datepicker: true,
         timepicker: true,
         inline:true,
@@ -182,12 +183,15 @@ function showIt(x){
         disabledDates: ['Aug.15.2022'],
         formatDate: 'M.d.Y',
         onSelectDate: re_run,
+        onSelectTime: re_run
       });
     }
     else if (x == " Aug 08") {
       $( "#input" ).datetimepicker({
         theme: "dark",
         minDate:new Date(),
+        MaxDate: "+1Y",
+
         datepicker: true,
         timepicker: true,
         inline:true,
@@ -200,12 +204,16 @@ function showIt(x){
         disabledDates: ['Aug.15.2022'],
         formatDate: 'M.d.Y',
         onSelectDate: re_run,
+        onSelectTime: re_run
+
       });
     }
     else{
       $( "#input" ).datetimepicker({
         theme: "dark",
         minDate:new Date(),
+        MaxDate: "+1Y",
+
         datepicker: true,
         timepicker: true,
         inline:true,
@@ -218,13 +226,15 @@ function showIt(x){
         disabledDates: ['Aug.15.2022'],
         formatDate: 'M.d.Y',
         onSelectDate: re_run,
+        onSelectTime: re_run
+
       });
     }
 }
 
 $('#input').datetimepicker({
   theme: "dark",
-  minDate:new Date(),
+  minDate: new Date(),
   datepicker: true,
   timepicker: true,
   inline:true,
@@ -237,12 +247,22 @@ $('#input').datetimepicker({
   disabledDates: ['Aug.15.2022'],
   formatDate: 'M.d.Y',
   onSelectDate: re_run,
+  onSelectTime: re_run
 });
 
 function re_run() {
   let date_val = $('#input').datetimepicker('getValue');
-  let val = date_val.toString().slice(3,10);
-  document.getElementById("curr_date").value = val;
+  let val = date_val.toString().slice(3,15)
+  let val_2 = date_val.toString().slice(16, 21)
+  let val_3 = date_val.toString().slice(16, 18)
+  if (parseInt(val_3) > 12){
+      val_3 = (parseInt(val_3) - 12).toString();
+      val_2 = val_3 + val_2.slice(2,5) + " PM"
+  }
+  else{
+    val_2 += " AM"
+  }
+  document.getElementById("curr_date").value = val + ", " + val_2;
   javascript:hideIt()
   console.log(date_val.toString().slice(3,10));
   javascript:showIt(val)
