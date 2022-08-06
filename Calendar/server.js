@@ -19,7 +19,6 @@ const dataSchema = {
     title: String,
     content: String,
     date: String,
-    time_val: String,
 }
 
 app.use(express.static(path.resolve(__dirname, 'client')));
@@ -31,11 +30,11 @@ app.get("/", function(req, res) {
 })
 
 app.post("/appointment", function(req, res) {
-    console.log(document.getElementById('input').value)
+    console.log(req.body.input)
     let newData = new Val ({
         title: req.body.user_name,
         content: req.body.email_input,
-        time: req.body.input,
+        date: req.body.curr_date,
     });
     newData.save();
     res.redirect('/');
