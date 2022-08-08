@@ -8,14 +8,13 @@
 
 <head>
 
+
 <style>
 /* width */
-
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
 }
-
 /* Track */
 ::-webkit-scrollbar-track {
   background: #f1f1f1; 
@@ -25,18 +24,15 @@
 ::-webkit-scrollbar-thumb {
   background: #888; 
 }
-
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
-
 .center {
   margin: auto;
   width:50%;
   zoom: 2.25;
 }
-
 input[type=text] {
   padding:10px;
   border:10;
@@ -44,7 +40,6 @@ input[type=text] {
   width: 320px;
   border-color: #007fff;
 }
-
 /* CSS */
 .button-9 {
   appearance: button;
@@ -74,19 +69,15 @@ input[type=text] {
   touch-action: manipulation;
   width: 320px;
 }
-
 .button-9:disabled {
   cursor: default;
 }
-
 .button-9:focus {
   box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
 }
-
 .shift_down {
   padding-top: 10px;
 }
-
 * {
 /*   box-shadow: 0 0 0 1px red; */
   box-sizing: border-box;
@@ -97,7 +88,6 @@ input[type=text] {
   overflow: hidden;
   
 }
-
 /* Style the links inside the navigation bar */
 .topnav a {
   float: left;
@@ -107,15 +97,12 @@ input[type=text] {
   text-decoration: none;
   font-size: 17px;
   font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
-
 }
-
 /* Change the color of links on hover */
 .topnav a:hover {
   background-color: #ddd;
   color: black;
 }
-
 /* Add a color to the active/current link */
 .topnav a.active {
   background-color: #007fff;
@@ -154,42 +141,21 @@ input[type=text] {
         <input type="submit" class="button-9" value="Book Time"></input>
   </div>
 </body>
-<body>
-</body>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Email</th>
-      <th scope="col">Date</th>
-    </tr>
-  </thead>
-  <tbody>
-  <%moviesList.forEach(movie => {%>
-      <tr>
-          <th scope="row"><%= movie._id %></th>
-          <td><%= movie.title %></td>
-          <td><%= movie.content %></td>
-          <td><%= movie.date %></td>
-      </tr>
-  <%})%>
-  </tbody>
-</table>
-
 </form>
 </html>
 
+<p hidden>
+  <%moviesList.forEach(movie => {%>
+    <%=arr.push(movie.title)%>
+  <%})%>
+</p>
 
+  
 <script>
-
-
 function hideIt(){
     $( "#input" ).datetimepicker( "destroy" );
     $( "#input" ).hide();
 }
-
 function showIt(x){
     $( "#input" ).show();
       if (x == " Aug 04") {
@@ -217,7 +183,6 @@ function showIt(x){
         theme: "dark",
         minDate:new Date(),
         MaxDate: "+1Y",
-
         datepicker: true,
         timepicker: true,
         inline:true,
@@ -231,7 +196,6 @@ function showIt(x){
         formatDate: 'M.d.Y',
         onSelectDate: re_run,
         onSelectTime: re_run
-
       });
     }
     else{
@@ -239,7 +203,6 @@ function showIt(x){
         theme: "dark",
         minDate:new Date(),
         MaxDate: "+1Y",
-
         datepicker: true,
         timepicker: true,
         inline:true,
@@ -253,11 +216,9 @@ function showIt(x){
         formatDate: 'M.d.Y',
         onSelectDate: re_run,
         onSelectTime: re_run
-
       });
     }
 }
-
 $('#input').datetimepicker({
   theme: "dark",
   minDate: new Date(),
@@ -277,6 +238,10 @@ $('#input').datetimepicker({
 });
 
 function re_run() {
+
+  var test = "<%= arr %>";
+  alert(test);
+
   let date_val = $('#input').datetimepicker('getValue');
   let val = date_val.toString().slice(3,15)
   let val_2 = date_val.toString().slice(16, 21)
@@ -293,6 +258,4 @@ function re_run() {
   console.log(date_val.toString().slice(3,10));
   javascript:showIt(val.slice(0,7))
 };
-
-
 </script>
