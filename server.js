@@ -34,9 +34,11 @@ app.post("/appointment", function(req, res) {
 })
 
 app.get('/', (req, res) => {
+    var arr = [];
     Movie.find({}, function(err, movies) {
         res.render('index', {
-            moviesList: movies
+            moviesList: movies,
+            arr,
         })
     })
 })
