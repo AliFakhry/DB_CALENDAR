@@ -4,6 +4,8 @@
 <link rel="stylesheet" type="text/css" href="node_modules/jquery-datetimepicker/jquery.datetimepicker.css" >
 <script src="node_modules/jquery-datetimepicker/jquery.js"></script>
 <script src="node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 <head>
 
 <style>
@@ -152,6 +154,30 @@ input[type=text] {
         <input type="submit" class="button-9" value="Book Time"></input>
   </div>
 </body>
+<body>
+</body>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%moviesList.forEach(movie => {%>
+      <tr>
+          <th scope="row"><%= movie._id %></th>
+          <td><%= movie.title %></td>
+          <td><%= movie.content %></td>
+          <td><%= movie.date %></td>
+      </tr>
+  <%})%>
+  </tbody>
+</table>
+
 </form>
 </html>
 
