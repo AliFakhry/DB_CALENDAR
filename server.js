@@ -1,17 +1,32 @@
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-
-var http = require('http');
-var path = require('path');
-
-const express = require("express");
+const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
+const ejs = require('ejs');
+const { kStringMaxLength } = require('buffer');
 
-var server = http.createServer(app);
-
-app.use(bodyParser.urlencoded({extended: true}));
+app.set('views', './views')
+app.set('view engine', 'ejs');
 
 mongoose.connect("mongodb+srv://Phone_Data:f1voUiCHfXQKQz2R@cluster0.xzech.mongodb.net/Website_Data", {useNewUrlParser: true}, {useUnifiedTopology: true})
+
+app.use('/node_modules', express.static(__dirname + '/node_modules/'));
+
+
+const moviesSchema = {
+    title: String,
+    genre: String,
+    year: String
+}
+
+const Movie = mongoose.model('test_datas', moviesSchema);
+
+app.get('/', (req, res) => {
+    Movie.find({}, function(err, movies) {
+        res.render('index', {
+            moviesList: movies
+        })
+    })
+})
 
 console.log(mongoose.connection.readyState);
 
@@ -24,10 +39,6 @@ const dataSchema = {
 app.use(express.static(path.resolve(__dirname, 'client')));
 
 const Val = mongoose.model("Test_Data", dataSchema);
-
-app.get("/", function(req, res) {
-    res.sendFile(__dirname + "/index.html")
-})
 
 app.post("/appointment", function(req, res) {
     console.log(req.body.input)
