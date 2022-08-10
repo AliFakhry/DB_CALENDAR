@@ -40,6 +40,39 @@ input[type=text] {
   width: 320px;
   border-color: #007fff;
 }
+
+input[type=label_invalid] {
+  padding:10px;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  width: 320px;
+  border-color: red;
+  background-color: #FFCCCB;
+}
+
+input[type=label_valid] {
+  padding:10px;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  width: 320px;
+  border-color: green;
+  background-color: #90ee90;
+}
+
+input[type=email] {
+  padding:10px;
+  border:10;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  width: 320px;
+  border-color: #007fff;
+}
+
+input[type=tel] {
+  padding:10px;
+  border:10;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  width: 320px;
+  border-color: #007fff;
+}
+
 /* CSS */
 .button-9 {
   appearance: button;
@@ -88,6 +121,7 @@ input[type=text] {
   overflow: hidden;
   
 }
+
 /* Style the links inside the navigation bar */
 .topnav a {
   float: left;
@@ -119,27 +153,36 @@ input[type=text] {
 <script>
   var amount = [];
   var times = [];
+  var return_form = false;
 </script>
 
-<form action="/appointment" method="post">
+<form action="/appointment" method="post" onsubmit="return validateForm()">
 <body style="background-color:black;">
     <div class="center" >       
         <div class = "shift_down">
         <div><h3>
             <label for="curr_date"></label>
-            <input type="text" id="curr_date" placeholder="" name="curr_date" readonly />
+            <input type="label_invalid" id="curr_date" placeholder="" name="curr_date" readonly />
             <span class="validity"></span>
           </div> </h3> 
         <h2><input id="input" type="text" ></h2>
         </div> 
         <div><h3>
           <label for="user_name"></label>
+          <font size = 3>
           <input type="text" id="user_name" placeholder="Name:" name="user_name" required />
+          </font>
+          <span class="validity"></span>
+          </div> </h3> 
+          <div><h3>
+          <label for="email_input"></label>
+          <font size = 3>
+          <input type="email" id="email_input" placeholder="Email:" name="email_input" required />
           <span class="validity"></span>
         </div> </h3> 
         <div><h3>
-          <label for="email_input"></label>
-          <input type="text" id="email_input" placeholder="Email:" name="email_input" required />
+          <font size = 3>
+          <input type="tel" id="phone_input" placeholder="Number:" name="phone_input"  minlength="10" maxlength="10" required />
           <span class="validity"></span>
         </div> </h3>
 
@@ -150,13 +193,18 @@ input[type=text] {
 </html>
 
 <p hidden>
-  <%moviesList.forEach(movie => {%>
-    <%=arr.push(movie.date + "_")%>
+  <%schedule_valsList.forEach(appt => {%>
+    <%=arr.push(appt.date + "_")%>
   <%})%>
 </p>
 
   
 <script>
+
+
+function validateForm() {
+  return return_form;
+}
 function hideIt(){
     $( "#input" ).datetimepicker( "destroy" );
     $( "#input" ).hide();
@@ -227,8 +275,20 @@ $('#input').datetimepicker({
 function re_run() {
 
   let date_val = $('#input').datetimepicker('getValue');
+
   let val = date_val.toString().slice(3,15)
   let val_2 = date_val.toString().slice(16, 21)
+
+  if (val_2 == "17:00" || val_2 == "14:00" || val_2 == "08:00"|| val_2 == "11:00") {
+    curr_date.type = "label_valid"
+    return_form = true;
+  }
+  else{
+    curr_date.type = "label_invalid"
+    return_form = false;
+  }
+
+  
   let val_3 = date_val.toString().slice(16, 18)
   if (parseInt(val_3) > 12){
       val_3 = (parseInt(val_3) - 12).toString();
