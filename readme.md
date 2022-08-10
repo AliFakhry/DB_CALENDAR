@@ -7,6 +7,9 @@ Current features:
 3. Calendar refreshes after every date selection. This is done to prevent multiple users from selecting the same date.
 4. If the entire date is booked, timepicker will not be available for that day.
 
+Note:
+
+1. Node Modules (DateTimePicker, etc) have not been attached in this repo.
 
 View (1/2):
 
