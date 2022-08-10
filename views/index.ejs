@@ -225,11 +225,15 @@ function showIt(times_left){
       }
     }
     times_total = ['8:00', '11:00', '14:00', '17:00']
+
     for (var i = 0; i < times_total.length; i++){
       if (times_left.includes(times_total[i])){
-        times_total.splice(i,1);
+        times_total[i] = " ";
       }
     }
+
+    times_total = times_total.filter(e => String(e).trim());
+
     $('#input').datetimepicker({
     theme: "dark",
     minDate: new Date(),
