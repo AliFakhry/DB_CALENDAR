@@ -9,7 +9,7 @@ Current features:
 
 Note:
 
-1. Node Modules (DateTimePicker, etc) have not been attached in this repo.
+1. Node Modules (DateTimePicker, etc) are not part of this repo. You will need to install them using Node.JS.
 
 View (1/2):
 
