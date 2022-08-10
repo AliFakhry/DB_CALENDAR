@@ -1,48 +1,254 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require("body-parser");
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-const app = express();
-const ejs = require('ejs');
-const { kStringMaxLength } = require('buffer');
+<link rel="stylesheet" type="text/css" href="node_modules/jquery-datetimepicker/jquery.datetimepicker.css" >
+<script src="node_modules/jquery-datetimepicker/jquery.js"></script>
+<script src="node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-app.set('view engine', 'ejs');
-
-app.use('/node_modules', express.static(__dirname + '/node_modules/'));
-
-app.use(bodyParser.urlencoded({extended: true}));
+<head>
 
 
-mongoose.connect("mongodb+srv://Phone_Data:f1voUiCHfXQKQz2R@cluster0.xzech.mongodb.net/Website_Data", {useNewUrlParser: true}, {useUnifiedTopology: true})
+<style>
+/* width */
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+.center {
+  margin: auto;
+  width:50%;
+  zoom: 2.25;
+}
+input[type=text] {
+  padding:10px;
+  border:10;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  width: 320px;
+  border-color: #007fff;
+}
+/* CSS */
+.button-9 {
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: #007fff;
+  border-radius: 6px;
+  border-width: 0;
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
+  font-size: 100%;
+  height: 55px;
+  line-height: 1.15;
+  margin: 12px 0 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all .2s,box-shadow .08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 320px;
+}
+.button-9:disabled {
+  cursor: default;
+}
+.button-9:focus {
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
+}
+.shift_down {
+  padding-top: 10px;
+}
+* {
+/*   box-shadow: 0 0 0 1px red; */
+  box-sizing: border-box;
+}
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+  
+}
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 28px 320px;
+  text-decoration: none;
+  font-size: 17px;
+  font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
+}
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #007fff;
+  color: white;
+}
+</style>
+</head>
 
-const dataSchema = {
-    title: String,
-    content: String,
-    date: String,
+<div class="topnav">
+  <a class="active" href="#home">Schedule</a>
+  <a href="#cancel">Cancel</a>
+</div>
+
+<script>
+  var amount = [];
+  var times = [];
+</script>
+
+<form action="/appointment" method="post">
+<body style="background-color:black;">
+    <div class="center" >       
+        <div class = "shift_down">
+        <div><h3>
+            <label for="curr_date"></label>
+            <input type="text" id="curr_date" placeholder="" name="curr_date" readonly />
+            <span class="validity"></span>
+          </div> </h3> 
+        <h2><input id="input" type="text" ></h2>
+        </div> 
+        <div><h3>
+          <label for="user_name"></label>
+          <input type="text" id="user_name" placeholder="Name:" name="user_name" required />
+          <span class="validity"></span>
+        </div> </h3> 
+        <div><h3>
+          <label for="email_input"></label>
+          <input type="text" id="email_input" placeholder="Email:" name="email_input" required />
+          <span class="validity"></span>
+        </div> </h3>
+
+        <input type="submit" class="button-9" value="Book Time"></input>
+  </div>
+</body>
+</form>
+</html>
+
+<p hidden>
+  <%moviesList.forEach(movie => {%>
+    <%=arr.push(movie.date + "_")%>
+  <%})%>
+</p>
+
+  
+<script>
+function hideIt(){
+    $( "#input" ).datetimepicker( "destroy" );
+    $( "#input" ).hide();
+}
+function showIt(times_left){
+    for (var i = 0; i < times_left.length; i++){
+      if (times_left[i] == ' 5:00' || times_left[i] == '5:00'){
+        times_left[i] = '17:00';
+      }
+      else if (times_left[i] == ' 2:00' || times_left[i] == '2:00'){
+        times_left[i] = '14:00';
+      }
+      else if (times_left[i] == ' 11:00' || times_left[i] == '11:0'  || times_left[i] == ' 11:0'){
+        times_left[i] = '11:00';
+      }
+      else if (times_left[i] == ' 8:00' || times_left[i] == ' 08:0'){
+        times_left[i] = '8:00';
+      }
+    }
+    times_total = ['8:00', '11:00', '14:00', '17:00']
+    for (var i = 0; i < times_total.length; i++){
+      if (times_left.includes(times_total[i])){
+        times_total.splice(i,1);
+      }
+    }
+    $('#input').datetimepicker({
+    theme: "dark",
+    minDate: new Date(),
+    datepicker: true,
+    timepicker: true,
+    inline:true,
+    format: 'M-d-Y',
+    lang:'ru',
+    allowTimes: times_total,
+    formatDate: 'M.d.Y',
+    onSelectDate: re_run,
+    onSelectTime: re_run
+});
+}
+let test = "<%= arr %>".replaceAll("_,", "_");
+test = test.split("_")
+for (var i = 0; i < test.length-1; i++){
+      amount.push(test[i].slice(1,12));
+}
+for (var i = 0; i < test.length-1; i++){
+      amount[i] = amount[i].replaceAll(" ", ".");
+}
+for (var i = 0; i < test.length-1; i++){
+      times.push(test[i].slice(13,18));
 }
 
-const Movie = mongoose.model("Test_Data", dataSchema);
+$('#input').datetimepicker({
+  theme: "dark",
+  minDate: new Date(),
+  datepicker: true,
+  timepicker: true,
+  inline:true,
+  format: 'M-d-Y',
+  lang:'ru',
+  allowTimes:[
+  '8:00', '11:00', '14:00',
+  '17:00'
+ ],
+  formatDate: 'M.d.Y',
+  onSelectDate: re_run,
+  onSelectTime: re_run
+});
+function re_run() {
 
-app.post("/appointment", function(req, res) {
-    let newData = new Movie ({
-        title: req.body.user_name,
-        content: req.body.email_input,
-        date: req.body.curr_date,
-    });
-    newData.save();
-    res.redirect('/');
-})
+  let date_val = $('#input').datetimepicker('getValue');
+  let val = date_val.toString().slice(3,15)
+  let val_2 = date_val.toString().slice(16, 21)
+  let val_3 = date_val.toString().slice(16, 18)
+  if (parseInt(val_3) > 12){
+      val_3 = (parseInt(val_3) - 12).toString();
+      val_2 = val_3 + val_2.slice(2,5) + " PM"
+  }
+  else{
+    val_2 += " AM"
+  }
+  let new_val = document.getElementById("curr_date").value = val + ", " + val_2;
+  new_val = new_val.replaceAll(" ", ".").slice(1,12);
 
-app.get('/', (req, res) => {
-    var arr = [];
-    Movie.find({}, function(err, movies) {
-        res.render('index', {
-            moviesList: movies,
-            arr,
-        })
-    })
-})
+  var times_left = []
 
-app.listen(3000, function() {
-    console.log('server is running');
-})
+  for (var i =0; i < test.length-1; i++){
+    if (amount[i] == new_val){
+      times_left.push(times[i]);
+    }
+  }
+
+  javascript:hideIt()
+  javascript:showIt(times_left)
+};
+</script>
