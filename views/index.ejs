@@ -182,7 +182,7 @@ input[type=tel] {
         </div> </h3> 
         <div><h3>
           <font size = 3>
-          <input type="tel" id="phone_input" placeholder="Number:" name="phone_input"  minlength="10" maxlength="10" required />
+          <input type="tel" id="phone_input" placeholder="Number:" name="phone_input"  onkeypress="return onlyNumberKey(event)" minlength="10" maxlength="10" required />
           <span class="validity"></span>
         </div> </h3>
 
@@ -198,9 +198,16 @@ input[type=tel] {
   <%})%>
 </p>
 
-  
 <script>
 
+
+function onlyNumberKey(evt) {
+          
+          var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+          if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+              return false;
+          return true;
+      }
 
 function validateForm() {
   return return_form;
@@ -209,7 +216,8 @@ function hideIt(){
     $( "#input" ).datetimepicker( "destroy" );
     $( "#input" ).hide();
 }
-function showIt(times_left){
+function showIt(times_left, curr_date){
+
     for (var i = 0; i < times_left.length; i++){
       if (times_left[i] == ' 5:00' || times_left[i] == '5:00'){
         times_left[i] = '17:00';
@@ -233,7 +241,24 @@ function showIt(times_left){
     }
 
     times_total = times_total.filter(e => String(e).trim());
-
+    
+    if (times_total.length == 0){
+      
+    $('#input').datetimepicker({
+    theme: "dark",
+    minDate: new Date(),
+    datepicker: true,
+    timepicker: false,
+    inline:true,
+    format: 'M-d-Y',
+    lang:'ru',
+    formatDate: 'M.d.Y',
+    disabledDates: curr_date,
+    onSelectDate: re_run,
+    onSelectTime: re_run,
+    });
+    }
+    else {
     $('#input').datetimepicker({
     theme: "dark",
     minDate: new Date(),
@@ -246,7 +271,7 @@ function showIt(times_left){
     formatDate: 'M.d.Y',
     onSelectDate: re_run,
     onSelectTime: re_run
-});
+    });}
 }
 let test = "<%= arr %>".replaceAll("_,", "_");
 test = test.split("_")
@@ -313,6 +338,6 @@ function re_run() {
   }
 
   javascript:hideIt()
-  javascript:showIt(times_left)
+  javascript:showIt(times_left, new_val)
 };
 </script>
