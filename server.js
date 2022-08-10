@@ -13,21 +13,23 @@ app.use('/node_modules', express.static(__dirname + '/node_modules/'));
 app.use(bodyParser.urlencoded({extended: true}));
 
 
-mongoose.connect("mongodb+srv://Phone_Data:f1voUiCHfXQKQz2R@cluster0.xzech.mongodb.net/Website_Data", {useNewUrlParser: true}, {useUnifiedTopology: true})
+mongoose.connect("REDACTED FOR SECURITY", {useNewUrlParser: true}, {useUnifiedTopology: true})
 
 const dataSchema = {
     title: String,
     content: String,
     date: String,
+    phone_number: String,
 }
 
-const Movie = mongoose.model("Test_Data", dataSchema);
+const schedule_val = mongoose.model("Test_Data", dataSchema);
 
 app.post("/appointment", function(req, res) {
-    let newData = new Movie ({
+    let newData = new schedule_val ({
         title: req.body.user_name,
         content: req.body.email_input,
         date: req.body.curr_date,
+        phone_number: req.body.phone_input,
     });
     newData.save();
     res.redirect('/');
@@ -35,9 +37,9 @@ app.post("/appointment", function(req, res) {
 
 app.get('/', (req, res) => {
     var arr = [];
-    Movie.find({}, function(err, movies) {
+    schedule_val.find({}, function(err, schedule_vals) {
         res.render('index', {
-            moviesList: movies,
+            schedule_valsList: schedule_vals,
             arr,
         })
     })
